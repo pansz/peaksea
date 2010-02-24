@@ -1,0 +1,7 @@
+set input-meta on
+set output-meta on
+set convert-meta off
+set keymap vi
+set editing-mode vi
+#set completion-ignore-case on
+
