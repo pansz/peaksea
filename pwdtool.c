@@ -178,8 +178,10 @@ int main(int argc, char *argv[])
             *delim = '\0';
             strcpy(str, delim+1);
             strcpy(key, argv[1]);
+            printf("%d str=%s key=%s\n", __LINE__, str, key);
             private_encrypt(pwd0, str, key, 21);
             private_encrypt(pwd1, key, str, 21);
+            printf("%d pwd0=%s pwd1=%s\n", __LINE__, pwd0, pwd1);
             interlaced_print(pwd0, pwd1, 0);
         }
         break;
