@@ -3,8 +3,8 @@
 " --------------------------------------------------
 "  VimIM -- Input Method by Vim, of Vim, for Vimmers
 " ==================================================
-let $VimIM = "$Date: 2010-02-05 05:42:45 +0800 (五, 05  2月 2010) $"
-let $VimIM = "$Revision: 2803 $"
+let $VimIM = "$Date: 2010-03-25 10:56:48 +0800 (四, 25  3月 2010) $"
+let $VimIM = "$Revision: 2822 $"
 
 let egg  = ["http://code.google.com/p/vimim/issues/entry           "]
 let egg += ["http://vimim-data.googlecode.com                      "]
@@ -1539,6 +1539,40 @@ function! s:vimim_start_chinese_mode()
     return <SID>vimim_toggle_punctuation()
 endfunction
 
+fun! s:utility_fix_get_acp_sid() "{{{
+    " Get the output of ":scriptnames" in the scriptnames_output variable.
+    let scriptnames_output = ''
+    redir => scriptnames_output
+    silent scriptnames
+    redir END
+    
+    " Split the output into lines and parse each line.	Add an entry to the
+    " "scripts" dictionary.
+    let scripts = {}
+    for line in split(scriptnames_output, "\n")
+      "we'll use autoload/acp.vim
+      if line =~ 'autoload/acp.vim'
+	" Get the first number in the line.
+	let nr = matchstr(line, '\d\+')
+	return nr
+      endif
+    endfor
+endfun "}}}
+let s:acp_sid=s:utility_fix_get_acp_sid()
+let s:keysMappingDriven = [
+			\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+			\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+			\ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+			\ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+			\ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+			\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
+			\ '<Space>', '<C-h>', '<BS>', ]
+function! FixAcp()
+ " call s:unmapForMappingDriven()
+ for key in s:keysMappingDriven
+   execute printf('inoremap <silent> <buffer> %s %s<C-r>=<SNR>'.s:acp_sid.'_feedPopup() <CR>', key, key)
+ endfor
+endfunction
 " -----------------------------------
 function! s:vimim_stop_chinese_mode()
 " -----------------------------------
@@ -1546,7 +1580,7 @@ function! s:vimim_stop_chinese_mode()
         sil!exe ':%y +'
     endif
     " ------------------------------
-    if exists('*Fixcp')
+    if exists('g:loaded_acp')
         sil!call FixAcp()
     endif
     " ------------------------------
@@ -1838,8 +1872,8 @@ function! s:vimim_punctuation_navigation_on()
     " ---------------------------------------
     let msg = "we should never map valid keycode"
     for char in s:valid_keys
-	let i = index(hjkl_list, char)
-	if i > -1 && char != period
+        let i = index(hjkl_list, char)
+        if i > -1 && char != period
             unlet hjkl_list[i]
         endif
     endfor
@@ -2481,11 +2515,10 @@ endfunction
 " -------------------------------------------
 function! s:vimim_i_chinese_mode_autocmd_on()
 " -------------------------------------------
-    if has("autocmd") && empty(&statusline)
+    if has("autocmd")
         augroup chinese_mode_autocmd
             autocmd!
-            autocmd BufEnter * let &statusline=s:vimim_statusline()
-            autocmd BufLeave * let &statusline=s:saved_statusline
+            " nothing here
         augroup END
     endif
 endfunction
@@ -2494,9 +2527,9 @@ endfunction
 function! s:vimim_i_cursor_color(switch)
 " --------------------------------------
     if empty(a:switch)
-        highlight! Cursor guifg=bg guibg=fg
+        highlight! lCursor guifg=bg guibg=fg
     else
-        highlight! Cursor guifg=bg guibg=Green
+        highlight! lCursor guifg=bg guibg=Green
     endif
 endfunction
 
@@ -3811,6 +3844,7 @@ function! s:vimim_shuangpin_transform(keyboard)
     let size = strlen(keyboard)
     let ptr = 0
     let output = ""
+    let bchar = "" " work-around for sogou
     while ptr < size
         if keyboard[ptr] !~ "[a-z;]"
             " bypass all non-characters, i.e. 0-9 and A-Z are bypassed
@@ -3824,7 +3858,7 @@ function! s:vimim_shuangpin_transform(keyboard)
             endif
             if has_key(s:shuangpin_table, sp1)
                 " the last odd shuangpin code are output as only shengmu
-                let output .= "'" . s:shuangpin_table[sp1]
+                let output .= bchar . s:shuangpin_table[sp1]
             else
                 " invalid shuangpin code are preserved
                 let output .= sp1
@@ -3926,7 +3960,7 @@ function! s:vimim_create_shuangpin_table(rule)
         endif
     endfor
     " the jxqy+v special case handling
-    if (s:vimim_shuangpin_abc>0) || (s:vimim_shuangpin_purple>0)
+    if (s:vimim_shuangpin_abc>0) || (s:vimim_shuangpin_purple>0) || (s:vimim_shuangpin_nature>0)
         let jxqy = {"jv" : "ju", "qv" : "qu", "xv" : "xu", "yv" : "yu"}
         call extend(sptable, jxqy)
     elseif s:vimim_shuangpin_microsoft > 0
@@ -4208,6 +4242,7 @@ function! s:vimim_initialize_cloud()
         endif
     endif
     let s:www_libcall = 0
+    let s:vimim_sogou_key = 0
     if filereadable(cloud)
         " in win32, strip the .dll suffix
         if has("win32") && cloud[-4:] ==? ".dll"
@@ -4329,29 +4364,22 @@ function! s:vimim_to_cloud_or_not(keyboards, clouds)
 endfunction
 
 " -----------------------------------------
-function! s:vimim_get_cloud_sogou(keyboard)
+function! s:vimim_get_cloud_sogou_key()
 " -----------------------------------------
-    let keyboard = a:keyboard
-    if s:vimim_cloud_sogou < 1
-    \|| empty(s:www_executable)
-    \|| empty(keyboard)
-        return []
+    if empty(s:www_executable)
+        return 0
     endif
-    let cloud = 'http://web.pinyin.sogou.com/web_ime/get_ajax/'
-    " support apostrophe as delimiter to remove ambiguity
-    " (1) examples: piao => pi'ao (cloth)  xian => xi'an (city)
-    " (2) add double quotes between keyboard
-    " (3) test: xi'anmeimeidepi'aosuifengpiaoyang
+    let cloud = 'http://web.pinyin.sogou.com/web_ime/patch.php'
     let output = 0
     " --------------------------------------------------------------
     " http://web.pinyin.sogou.com/web_ime/get_ajax/woyouyigemeng.key
     " --------------------------------------------------------------
     try
         if s:www_libcall
-            let input = cloud . keyboard . '".key'
+            let input = cloud
             let output = libcall(s:www_executable, "do_geturl", input)
         else
-            let input = cloud . '"' . keyboard . '".key'
+            let input = cloud
             let output = system(s:www_executable . input)
         endif
     catch
@@ -4362,10 +4390,59 @@ function! s:vimim_get_cloud_sogou(keyboard)
         let output = 0
     endtry
     if empty(output)
+        return 0
+    endif
+    return get(split(output, '"'), 1)
+endfunction
+
+" -----------------------------------------
+function! s:vimim_get_cloud_sogou(keyboard)
+" -----------------------------------------
+    let keyboard = a:keyboard
+    if s:vimim_cloud_sogou < 1
+    \|| empty(s:www_executable)
+    \|| empty(keyboard)
+        return []
+    endif
+
+    " only use sogou when we get a valid key
+    if empty(s:vimim_sogou_key)
+        let s:vimim_sogou_key = s:vimim_get_cloud_sogou_key()
+    endif
+
+    let cloud = 'http://web.pinyin.sogou.com/api/py?key='. s:vimim_sogou_key .'&query='
+    " support apostrophe as delimiter to remove ambiguity
+    " (1) examples: piao => pi'ao (cloth)  xian => xi'an (city)
+    " (2) add double quotes between keyboard
+    " (3) test: xi'anmeimeidepi'aosuifengpiaoyang
+    let output = 0
+    " --------------------------------------------------------------
+    " http://web.pinyin.sogou.com/web_ime/get_ajax/woyouyigemeng.key
+    " --------------------------------------------------------------
+    try
+        if s:www_libcall
+            let input = cloud . keyboard
+            let output = libcall(s:www_executable, "do_geturl", input)
+        else
+            let input = '"' . cloud . keyboard . '"'
+            let output = system(s:www_executable . input)
+        endif
+    catch
+        let msg = "it looks like sogou has trouble with its cloud?"
+        if s:vimimdebug > 0
+            call s:debugs('sogou::exception=', v:exception)
+        endif
+        let output = 0
+    endtry
+    call s:debugs('sogou::outputquery=', output)
+    if empty(output)
         return []
     endif
     " --------------------------------------------------------
+    " old:
     " ime_query_res="%E6%88%91";ime_query_key="woyouyigemeng";
+    " new:
+    " ime_callback("%E6%88%91%EF%BC%9A2%09+%E5%96%94%EF%BC%9A2%09+%E6%8F%A1%EF%BC%9A2%09+%E7%AA%9D%EF%BC%9A2%09+%E5%8D%A7%EF%BC%9A2%09+%E6%B2%83%EF%BC%9A2%09+%E7%A1%AA%EF%BC%9A2%09+%E5%80%AD%EF%BC%9A2%09+%E6%B6%A1%EF%BC%9A2%09+%E8%9C%97%EF%BC%9A2%09+%E6%B8%A5%EF%BC%9A2%09+%E6%96%A1%EF%BC%9A2%09+%E9%BE%8C%EF%BC%9A2%09+%E6%8C%9D%EF%BC%9A2%09+%E8%82%9F%EF%BC%9A2%09+%E6%BF%84%EF%BC%9A2%09+%E5%81%93%EF%BC%9A2%09+%E5%B9%84%EF%BC%9A2%09+%E8%8E%B4%EF%BC%9A2%09+%E6%A5%83%EF%BC%9A2","wo",0);
     " --------------------------------------------------------
     let first = match(output, '"', 0)
     let second = match(output, '"', 0, 2)
@@ -4384,7 +4461,7 @@ function! s:vimim_get_cloud_sogou(keyboard)
         let output = s:vimim_i18n_read(output)
     endif
     " ---------------------------
-    " output='我有一個夢：13	+
+    " output='我有一個夢：13    +
     " ---------------------------
     let menu = []
     for item in split(output, '\t+')
@@ -4643,7 +4720,7 @@ function! s:vimim_process_mycloud_output(keyboard, output)
         return []
     endif
     " ----------------------
-    " 春夢	8	4420
+    " 春夢      8       4420
     " ----------------------
     let menu = []
     for item in split(output, '\n')
@@ -5415,7 +5492,6 @@ function! s:vimim_initialize_i_setting()
     let s:saved_lazyredraw=&lazyredraw
     let s:saved_hlsearch=&hlsearch
     let s:saved_pumheight=&pumheight
-    let s:saved_statusline=&statusline
     let s:saved_laststatus=&laststatus
 endfunction
 
@@ -5430,6 +5506,15 @@ function! s:vimim_i_setting_on()
     endif
     set hlsearch
     set iminsert=1
+    if empty(&statusline)
+        set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P%{IMName()}
+    elseif &statusline =~ 'IMName'
+        " nothing, because it is already in the statusline
+    elseif &statusline =~ '\V\^%!'
+        let &statusline .= '.IMName()'
+    else
+        let &statusline .= '%{IMName()}'
+    endif
 endfunction
 
 " -------------------------------
@@ -5442,7 +5527,6 @@ function! s:vimim_i_setting_off()
     let &lazyredraw=s:saved_lazyredraw
     let &hlsearch=s:saved_hlsearch
     let &pumheight=s:saved_pumheight
-    let &statusline=s:saved_statusline
     let &laststatus=s:saved_laststatus
 endfunction
 
