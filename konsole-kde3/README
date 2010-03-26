@@ -1,0 +1,6 @@
+
+If you use Konsole in KDE3 and want the peaksea dark color in 16-color mode, 
+
+then put the schema in the following path:
+
+~/.kde/share/apps/konsole/peakseadark.schema
