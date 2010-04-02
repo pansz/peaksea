@@ -388,7 +388,11 @@ if v:version >= 700
     let g:vimim_shuangpin_abc=1
     "let g:vimim_tab_as_onekey=1
     let g:vimim_static_input_style=1
-    let g:vimim_mycloud_url="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
+    if has("win32") || has("win32unix")
+        let g:vimim_mycloud_url="dll:".$HOME."/vimfiles/plugin/libvimim.dll:172.16.55.240"
+    else
+        let g:vimim_mycloud_url="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
+    endif
     "let g:vimim_mycloud_url="app:".$HOME."/src/misc/myim/client/mycloud"
     "let g:vimim_mycloud_url="http://127.0.0.1:8080/pwd/"
     if filereadable($HOME."/.vim/plugin/vimimsvn.vim")
