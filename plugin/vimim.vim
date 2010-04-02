@@ -3,17 +3,26 @@
 " --------------------------------------------------
 "  VimIM -- Input Method by Vim, of Vim, for Vimmers
 " ==================================================
-let $VimIM = "$Date: 2010-03-25 10:56:48 +0800 (四, 25  3月 2010) $"
-let $VimIM = "$Revision: 2822 $"
+let $VimIM = "$Date: 2010-03-30 15:10:10 +0800 (二, 30  3月 2010) $"
+let $VimIM = "$Revision: 2929 $"
+" -------------------------------------------------------------------
 
-let egg  = ["http://code.google.com/p/vimim/issues/entry           "]
+" For the impatient:
+" (1) throw this script into your vim plugin directory
+" (2) open your vim and enter insert mode
+" (3) type:  vim<C-6>
+" (4) type:  vimimhelp<C-6><C-6>
+" -------------------------------------------------------------------
+let egg  = ["http://code.google.com/p/vimim/wiki/QuickStart        "]
+let egg += ["http://code.google.com/p/vimim/wiki/ChangeLog         "]
+let egg += ["http://code.google.com/p/vimim/issues/entry           "]
 let egg += ["http://vimim-data.googlecode.com                      "]
 let egg += ["http://vimim.googlecode.com/svn/vimim/vimim.html      "]
 let egg += ["http://vimim.googlecode.com/svn/vimim/vimim.vim.html  "]
-let egg += ["http://vimim.googlecode.com/svn/trunk/plugin/vimim.vim"]
 let egg += ["http://vim.sf.net/scripts/script.php?script_id=2506   "]
 let egg += ["http://pim-cloud.appspot.com                          "]
 let egg += ["http://groups.google.com/group/vimim                  "]
+" -------------------------------------------------------------------
 
 let VimIM = " ====  Introduction     ==== {{{"
 " ===========================================
@@ -46,8 +55,10 @@ let VimIM = " ====  Introduction     ==== {{{"
 "            * It is independent of the Operating System.
 "            * It is independent of Vim mbyte-XIM/mbyte-IME API.
 " -----------------------------------------------------------
-"   Install: (1) [optional] download a datafile from code.google.com
+" Install:   (1) [optional] download a datafile from code.google.com
 "            (2) drop vimim.vim and the datafile to the plugin directory
+" -----------------------------------------------------------
+" Latest:    http://vimim.googlecode.com/svn/trunk/plugin/vimim.vim
 " -----------------------------------------------------------
 " EasterEgg: (in Vim Insert Mode, type 4 chars:) vim<C-6>
 " -----------------------------------------------------------
@@ -174,6 +185,7 @@ function! s:vimim_initialize_session()
     let s:start_row_before = 0
     let s:start_column_before = 1
     let s:www_executable = 0
+    let s:scriptnames_output = 0
     " --------------------------------
     let s:im = {}
     let s:inputs = {}
@@ -717,14 +729,15 @@ function! s:vimim_egg_vimimhelp()
 " -------------------------------
     let eggs = []
     " -------------------------------------------
-    call add(eggs, "错误报告：" . s:vimimhelp[0])
-    call add(eggs, "民间词库：" . s:vimimhelp[1])
-    call add(eggs, "最新主页：" . s:vimimhelp[2])
-    call add(eggs, "最新程式：" . s:vimimhelp[3])
-    call add(eggs, "试用版本：" . s:vimimhelp[4])
-    call add(eggs, "官方网址：" . s:vimimhelp[5])
-    call add(eggs, "自己的云：" . s:vimimhelp[6])
-    call add(eggs, "新闻论坛：" . s:vimimhelp[7])
+    call add(eggs, "快速指南：" . s:vimimhelp[0])
+    call add(eggs, "变更记录：" . s:vimimhelp[1])
+    call add(eggs, "错误报告：" . s:vimimhelp[2])
+    call add(eggs, "民间词库：" . s:vimimhelp[3])
+    call add(eggs, "最新主页：" . s:vimimhelp[4])
+    call add(eggs, "最新程式：" . s:vimimhelp[5])
+    call add(eggs, "官方网址：" . s:vimimhelp[6])
+    call add(eggs, "自己的云：" . s:vimimhelp[7])
+    call add(eggs, "新闻论坛：" . s:vimimhelp[8])
     " -------------------------------------------
     return map(eggs, '"VimIM " .v:val . "　"')
 endfunction
@@ -1539,51 +1552,85 @@ function! s:vimim_start_chinese_mode()
     return <SID>vimim_toggle_punctuation()
 endfunction
 
-fun! s:utility_fix_get_acp_sid() "{{{
+" frederick.zou fixes these plugins: supertab, autocomplpop(acp)
+" supertab[http://www.vim.org/scripts/script.php?script_id=1643]
+" autocomplpop(acp)[lhttp://www.vim.org/scripts/script.php?script_id=1879]
+" -----------------------------------
+function!  s:vimim_getsid(scriptname)
+" -----------------------------------
+    "use s:getsid to return a script sid, translate <SID> to <SNR>N_ style
+    let l:scriptname = a:scriptname
     " Get the output of ":scriptnames" in the scriptnames_output variable.
-    let scriptnames_output = ''
-    redir => scriptnames_output
-    silent scriptnames
-    redir END
-    
-    " Split the output into lines and parse each line.	Add an entry to the
-    " "scripts" dictionary.
-    let scripts = {}
-    for line in split(scriptnames_output, "\n")
-      "we'll use autoload/acp.vim
-      if line =~ 'autoload/acp.vim'
-	" Get the first number in the line.
-	let nr = matchstr(line, '\d\+')
-	return nr
-      endif
+    if empty(s:scriptnames_output)
+        let saved_shellslash=&shellslash
+        set shellslash
+        redir => s:scriptnames_output
+        silent scriptnames
+        redir END
+        let &shellslash=saved_shellslash
+    endif
+    for line in split(s:scriptnames_output, "\n")
+        " Only do non-blank lines
+        if line =~ l:scriptname
+            " Get the first number in the line.
+            let nr = matchstr(line, '\d\+')
+            return nr
+        endif
     endfor
-endfun "}}}
-let s:acp_sid=s:utility_fix_get_acp_sid()
-let s:keysMappingDriven = [
-			\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-			\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-			\ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-			\ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-			\ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-			\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
-			\ '<Space>', '<C-h>', '<BS>', ]
-function! FixAcp()
- " call s:unmapForMappingDriven()
- for key in s:keysMappingDriven
-   execute printf('inoremap <silent> <buffer> %s %s<C-r>=<SNR>'.s:acp_sid.'_feedPopup() <CR>', key, key)
- endfor
+    return 0
 endfunction
+
+" -----------------------------------
+function! s:vimim_plugins_fix_start()
+" -----------------------------------
+    if !exists('s:acp_sid')
+        let s:acp_sid = s:vimim_getsid('autoload/acp.vim')
+    endif
+    if !exists('s:supertab_sid')
+        let s:supertab_sid = s:vimim_getsid('plugin/supertab.vim')
+    endif
+    if !empty(s:acp_sid)
+        AcpDisable
+    endif
+endfunction
+
+" ----------------------------------
+function! s:vimim_plugins_fix_stop()
+" ----------------------------------
+    if !empty(s:acp_sid)
+        let s:ACPkeysMappingDriven = [
+            \ 'a','b','c','d','e','f','g','h','i','j','k','l','m',
+            \ 'n','o','p','q','r','s','t','u','v','w','x','y','z',
+            \ 'A','B','C','D','E','F','G','H','I','J','K','L','M',
+            \ 'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            \ '0','1','2','3','4','5','6','7','8','9',
+            \ '-','_','~','^','.',',',':','!','#','=','%','$','@',
+            \ '<','>','/','\','<Space>', '<C-h>', '<BS>', '<Enter>',]
+        for key in s:ACPkeysMappingDriven
+            exe printf('iu <silent> %s', key)
+            exe printf('im <silent> %s %s<C-r>=<SNR>%s_feedPopup()<CR>', key, key, s:acp_sid)
+        endfor
+        AcpEnable
+    endif
+    " -------------------------------------------------------------
+    if !empty(s:supertab_sid)
+        if g:SuperTabMappingForward =~ '^<tab>$'
+            exe printf("im <tab> <C-R>=<SNR>%s_SuperTab('p')<CR>", s:supertab_sid)
+        endif
+        if g:SuperTabMappingBackward =~ '^<s-tab>$'
+            exe printf("im <s-tab> <C-R>=<SNR>%s_SuperTab('n')<CR>", s:supertab_sid)
+            " inoremap <silent> <Tab> <C-n>
+            " inoremap <silent> <s-Tab> <C-p>
+        endif
+    endif
+endfunction
+
 " -----------------------------------
 function! s:vimim_stop_chinese_mode()
 " -----------------------------------
     if s:vimim_auto_copy_clipboard>0 && has("gui_running")
         sil!exe ':%y +'
     endif
-    " ------------------------------
-    if exists('g:loaded_acp')
-        sil!call FixAcp()
-    endif
-    " ------------------------------
     sil!call s:vimim_stop()
 endfunction
 
@@ -2526,10 +2573,11 @@ endfunction
 " --------------------------------------
 function! s:vimim_i_cursor_color(switch)
 " --------------------------------------
+    highlight! lCursor guifg=bg guibg=Green
     if empty(a:switch)
-        highlight! lCursor guifg=bg guibg=fg
+        highlight! Cursor guifg=bg guibg=fg
     else
-        highlight! lCursor guifg=bg guibg=Green
+        highlight! Cursor guifg=bg guibg=Green
     endif
 endfunction
 
@@ -5550,6 +5598,7 @@ endfunction
 function! s:vimim_start()
 " -----------------------
     sil!call s:vimim_initialization_once()
+    sil!call s:vimim_plugins_fix_start()
     sil!call s:vimim_i_setting_on()
     sil!call s:vimim_i_cursor_color(1)
     sil!call s:vimim_super_reset()
@@ -5572,6 +5621,7 @@ function! s:vimim_stop()
     sil!call s:vimim_debug_reset()
     sil!call s:vimim_i_map_off()
     sil!call s:vimim_initialize_mapping()
+    sil!call s:vimim_plugins_fix_stop()
 endfunction
 
 " -----------------------------------
@@ -6163,6 +6213,7 @@ function! s:vimim_chinese_mode_mapping_on()
     endif
        imap <silent> <C-Bslash> <Plug>VimimChinesemode
     noremap <silent> <C-Bslash> :call <SID>Chinesemode()<CR>
+    vmap <silent> <C-Bslash> :call <SID>Chinesemode()<CR>gv
 endfunction
 
 " --------------------------------------
@@ -6185,10 +6236,10 @@ function! s:vimim_ctrl_space_mapping_on()
 " ---------------------------------------
     if s:vimim_ctrl_space_to_toggle == 1
         if has("gui_running")
-            nmap <C-Space> <C-Bslash>
+            map <C-Space> <C-Bslash>
             imap <C-Space> <C-Bslash>
         elseif has("win32unix")
-            nmap <C-@> <C-Bslash>
+            map <C-@> <C-Bslash>
             imap <C-@> <C-Bslash>
         endif
     elseif s:vimim_ctrl_space_to_toggle == 2

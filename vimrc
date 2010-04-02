@@ -390,7 +390,7 @@ if v:version >= 700
     let g:vimim_static_input_style=1
     let g:vimim_mycloud_url="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
     "let g:vimim_mycloud_url="app:".$HOME."/src/misc/myim/client/mycloud"
-    "let g:vimim_mycloud_url="http://127.0.0.1:8080/abc/"
+    "let g:vimim_mycloud_url="http://127.0.0.1:8080/pwd/"
     if filereadable($HOME."/.vim/plugin/vimimsvn.vim")
         runtime plugin/vimimsvn.vim
     else
@@ -451,10 +451,7 @@ func! MySTL()
     return stl.bar
 endfun
 
-if exists("b:loaded_vimim")
-    set stl=%!IMName().MySTL()
-else
-    set stl=%!MySTL()
-endif
+"set stl=%!IMName().MySTL()
+set stl=%!MySTL()
 
 " vim:tw=0:sw=4:nowrap:nolbr:
