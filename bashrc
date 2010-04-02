@@ -10,7 +10,6 @@ ulimit -c 2048
 export EDITOR=vi
 export LANG="zh_CN.UTF-8"
 export LANGUAGE=en_US:zh
-export HGUSER="Pan, Shi Zhu"
 
 _show_all()
 {
