@@ -1,0 +1,10 @@
+
+If you use Xfce4 Terminal and want the peaksea dark color in 16-color mode, 
+
+then put the schema in the following path:
+
+~/.config/Terminal/terminalrc
+
+
+Note: xfce4 does not have a separate color scheme file, so the above will overwrite your own non-color-related settings. You can do a diff/merge if you really want.
+
