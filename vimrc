@@ -455,7 +455,7 @@ func! MySTL()
     return stl.bar
 endfun
 
-"set stl=%!IMName().MySTL()
-set stl=%!MySTL()
+set stl=%!IMName().MySTL()
+"set stl=%!MySTL()
 
 " vim:tw=0:sw=4:nowrap:nolbr:
