@@ -7,13 +7,18 @@
 #attrcolor i "+b"
 # erase background with current bg color
 #defbce "on" 
+startup_message off
+deflogin off
 defc1 off
 defutf8 on
 defscrollback 2048
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
 #hardstatus lastline "%{= dd} %-w%{= bW}%20>[%n*%t]%{-}%+w%80< %=%H "
-hardstatus alwayslastline "%{= dd} %-w%{= dG}%20>[%n*%t]%{-}%+w%80< %=%m.%d %H "
-startup_message off
+#hardstatus alwayslastline "%{= dd} %-w%{= dG}%20>[%n*%t]%{-}%+w%80< %=%m.%d %H "
+caption always "%{= dd} %-w%{= dG}%20>[%n*%t]%{-}%+w%80< %=%m.%d %H "
+shelltitle '$ |bash'
+hardstatus string "screen: %t"
+altscreen on
 #bindkey -k k7 command
 bindkey -k k8 prev
 bindkey -k k9 next
