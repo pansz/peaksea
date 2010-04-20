@@ -1,10 +1,12 @@
 # my common bashrc inside vim files
 
+alias apb='sudo aptitude build-dep'
 alias api='sudo aptitude install'
-alias apu='sudo aptitude update && sudo aptitude full-upgrade'
-alias apd='sudo apt-get build-dep'
+alias apr='sudo aptitude remove'
 alias aps='aptitude search'
+alias apu='sudo aptitude update && sudo aptitude full-upgrade'
 alias apw='aptitude show'
+alias apy='aptitude why'
 alias s='screen'
 ulimit -c 2048
 export EDITOR=vi
