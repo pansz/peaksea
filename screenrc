@@ -1,9 +1,11 @@
 
+defshell /usr/bin/bash
+
 # terminfo and termcap for nice 256 color terminal
 # allow bold colors - necessary for some reason
 #attrcolor b "i"
 # tell screen how to set colors. AB = background, AF=foreground
-#termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 #attrcolor i "+b"
 # erase background with current bg color
 #defbce "on" 
@@ -22,6 +24,6 @@ altscreen on
 #bindkey -k k7 command
 bindkey -k k8 prev
 bindkey -k k9 next
-bindkey -k k; title
+#bindkey -k k; title
 #msgwait 9
 #bind k; title

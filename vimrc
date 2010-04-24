@@ -102,7 +102,7 @@ if !has("gui_running")
         map  <backspace>
         map!  <backspace>
         map OM <CR>
-        set t_Co=16
+        set t_Co=256
         set mouse=a
     elseif &term == "fbterm"
         " wonderful term
