@@ -99,62 +99,15 @@ if !has("gui_running")
     elseif &term == 'screen'
         " screen terminal has wrong interpration of backspace
         " it need to be re-compiled for 256-color support
+        " but it is better to leave it 16-color
         map  <backspace>
         map!  <backspace>
         map OM <CR>
-        set t_Co=256
-        set mouse=a
-    elseif &term == "fbterm"
-        " wonderful term
-    elseif &term == 'rxvt-cygwin-native'
-        " A crippled terminal, but still better than DOS prompt
-        " Anyway, this is the only terminal which has best support for IME 
         set t_Co=16
-        " Map <Pad5> to <Nop>
-        map  <Nop>
-        map!  <Nop>
-        map [7$ <S-Home>
-        map [a <S-Up>
-        map [d <S-Left>
-        map [c <S-Right>
-        map [8$ <S-End>
-        map [b <S-Down>
-        map [3$ <S-Del>
-        map [2^ <C-Insert>
-
-    elseif &term == 'rxvt'
-
-        " RXVT is fast, but the compatibility is not as good as XTerm
-        set t_Co=16 mouse=a
-
-        " RXVT only, Map the arraw keys on numpad
-        map Ow <Home>
-        map! Ow <Home>
-        map Ox <Up>
-        map! Ox <Up>
-        map Oy <PageUp>
-        map! Oy <PageUp>
-        map Ot <Left>
-        map! Ot <Left>
-        map Ou <Nop>
-        map! Ou <Nop>
-        map Ov <Right>
-        map! Ov <Right>
-        map Oq <End>
-        map! Oq <End>
-        map Or <Down>
-        map! Or <Down>
-        map Os <PageDown>
-        map! Os <PageDown>
-        map Op <Insert>
-        map! Op <Insert>
-        map On <Del>
-        map! On <Del>
-
+        set mouse=a
     elseif &term == 'cygwin'
         " Truly crippled terminal, nothing to say, but it's the default.
-        " Everything has advantages, 
-        " For example, manpage views best in this terminal.
+        " Sometimes we have to use it
         " Map <Pad5> to <Nop>
         set t_Co=16
         map [G <Nop>
