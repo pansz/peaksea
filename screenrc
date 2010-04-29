@@ -19,11 +19,12 @@ termcapinfo xterm|xterms|xs|rxvt ti@:te@
 #hardstatus alwayslastline "%{= dd} %-w%{= dG}%20>[%n*%t]%{-}%+w%80< %=%m.%d %H "
 caption always "%{= dd} %-w%{= dG}%20>[%n*%t]%{-}%+w%80< %=%m.%d %H "
 shelltitle '$ |bash'
-hardstatus string "s%n %t"
+hardstatus string "%t %H screen %n"
 altscreen on
 #bindkey -k k7 command
 bindkey -k k8 prev
 bindkey -k k9 next
 #bindkey -k k; title
+vbell off
 #msgwait 9
 #bind k; title

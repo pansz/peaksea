@@ -59,7 +59,7 @@ if !has("gui_running")
         " Color XTerm is provided with all X distributions.
         " It has good mouse support with 256 color support
         set t_Co=256 
-        " this works only for Konsole 2.0+
+        " this works only for Konsole 2.0+, and now we use xterm
         " let &t_SI = "\<Esc>]50;CursorShape=1\x7"
         " let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
