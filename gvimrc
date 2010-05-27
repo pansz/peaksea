@@ -83,7 +83,7 @@ elseif has("x11")		" X Window
         set shell=/bin/sh
     endif
     " set guifontwide=-*-song\ ti-medium-r-*-*-16-*-*-*-*-*-*-*
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 16
+    set guifont=DejaVu\ Sans\ Mono\ 16
     nunmap <Leader>fp
     set columns=999 lines=999
     nnoremap <silent> <Leader>fp :cope 1<CR><C-W>w:Tlist<CR>

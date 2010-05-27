@@ -2,7 +2,7 @@
 Xft.dpi: 96
 
 XTerm*faceName: DejaVu Sans Mono
-XTerm*faceNameDoublesize: WenQuanYi Zen Hei
+XTerm*faceNameDoublesize: WenQuanYi Zen Hei Mono
 XTerm*faceSize: 16
 
 XTerm*color0:           #000000
