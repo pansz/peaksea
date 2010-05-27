@@ -1,2 +1,6 @@
 [ui]
 username=Pan, Shi Zhu
+
+[web]
+allow_push = *
+push_ssl = false
