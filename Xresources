@@ -24,6 +24,6 @@ XTerm*color15:          #e0e0e0
 XTerm*cursorColor:      #00f000
 
 XTerm*reverseVideo:     False
-XTerm*background:       #202020
+XTerm*background:       #000000
 XTerm*foreground:       #d0d0d0
 XTerm*boldMode:         False

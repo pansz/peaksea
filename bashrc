@@ -9,7 +9,7 @@ xterm*)
 screen*)
     PATHTITLE='\[\ek\w\e\\\]'
     PROGRAMTITLE='\[\ek\e\\\]'
-    PS1="${PROGRAMTITLE}${PATHTITLE}"'\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+    PS1="${PROGRAMTITLE}${PATHTITLE}"'\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
     ;;
 *)
     PS1='\u@\h:\w\$ '
