@@ -25,6 +25,7 @@ alias apu='sudo aptitude update && sudo aptitude full-upgrade'
 alias apw='aptitude show'
 alias apy='aptitude why'
 alias s='screen'
+alias pshs='python -m SimpleHTTPServer'
 ulimit -c 2048
 export EDITOR=vi
 export LANG="zh_CN.UTF-8"
