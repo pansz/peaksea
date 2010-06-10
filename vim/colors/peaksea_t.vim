@@ -1,7 +1,7 @@
 " Vim color file --- psc (peak sea color) "Lite version"
 " Maintainer:	Pan, Shi Zhu <Go to the following URL for my email>
 " URL:		http://vim.sourceforge.net/scripts/script.php?script_id=760
-" Last Change:	10 Mar 2009
+" Last Change:	5 Feb 2010
 " Version:	3.4
 "
 "	Comments and e-mails are welcomed, thanks.
@@ -16,7 +16,7 @@
 " Note: Please set the background option in your .vimrc and/or .gvimrc
 "
 "	It is much better *not* to set 'background' option inside
-"	a colorscheme file.  because ":set background" inside a colorscheme
+"	a colorscheme file.  because ":set background" improperly
 "	may cause colorscheme be sourced twice
 "
 " Color Scheme Overview: 
@@ -148,6 +148,11 @@ if &background=='light'
 
   " gui define for background=light end here
 
+  " generally, a dumb terminal is dark, we assume the light terminal has 256
+  " color support.
+  if &t_Co==8 || &t_Co==16
+    set t_Co=256
+  endif
   if &t_Co==256
     " 256color light terminal support here
 
@@ -339,9 +344,7 @@ elseif &background=='dark'
 
   if &t_Co==8 || &t_Co==16
     " for 8-color and 16-color term
-    hi Normal		ctermfg=LightGrey   ctermbg=Black
-    " Comment/Uncomment the following line to disable/enable transparency
-    " hi Normal		ctermfg=LightGrey   ctermbg=NONE
+    hi Normal		ctermfg=LightGrey   ctermbg=NONE
     hi Special		ctermfg=Yellow	    ctermbg=NONE
     hi Comment		ctermfg=DarkYellow  ctermbg=NONE
     hi Constant		ctermfg=Blue	    ctermbg=NONE
@@ -490,7 +493,7 @@ elseif &background=='dark'
     " 256color dark terminal support here
     hi Normal		ctermfg=!d0d0d0	ctermbg=!202020	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
-    "hi Normal		ctermfg=!d0d0d0	ctermbg=NONE	cterm=NONE
+    hi Normal		ctermfg=!d0d0d0	ctermbg=NONE	cterm=NONE
     hi Comment		ctermfg=!d0d090	ctermbg=NONE	cterm=NONE
     hi Constant		ctermfg=!80c0e0	ctermbg=NONE	cterm=NONE
     hi Number		ctermfg=!e0c060	ctermbg=NONE	cterm=NONE
@@ -514,7 +517,7 @@ elseif &background=='dark'
     hi SpecialKey	ctermfg=!b0d0f0	ctermbg=NONE	cterm=NONE
     hi NonText		ctermfg=!6080f0	ctermbg=!101010	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
-    "hi NonText		ctermfg=!6080f0	ctermbg=NONE	cterm=NONE
+    hi NonText		ctermfg=!6080f0	ctermbg=NONE	cterm=NONE
     hi Directory	ctermfg=!80c0e0	ctermbg=NONE	cterm=NONE
     hi ErrorMsg		ctermfg=!d0d090	ctermbg=!800000	cterm=NONE
     hi MoreMsg		ctermfg=!c0e080	ctermbg=NONE	cterm=NONE

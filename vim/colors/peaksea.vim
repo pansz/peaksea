@@ -252,7 +252,7 @@ if &background=='light'
     hi ModeMsg		cterm=bold
     hi TabLineSel	cterm=bold
 
-    "hi lCursor		ctermfg=bg	ctermbg=fg	cterm=NONE
+    " hi lCursor		ctermfg=bg	ctermbg=fg	cterm=NONE
   endif " t_Co==256
   " }}}2
 elseif &background=='dark' 
