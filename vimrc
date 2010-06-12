@@ -411,4 +411,6 @@ endfun
 set stl=%!IMName().MySTL()
 "set stl=%!MySTL()
 
+autocmd BufNewFile *.py 0r $HOME/.vim/temp/template.py
+
 " vim:tw=0:sw=4:nowrap:nolbr:
