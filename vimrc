@@ -105,6 +105,7 @@ if !has("gui_running")
         map OM <CR>
         set t_Co=16
         set mouse=a
+        set ttymouse=xterm2
     elseif &term == 'cygwin'
         " Truly crippled terminal, nothing to say, but it's the default.
         " Sometimes we have to use it
