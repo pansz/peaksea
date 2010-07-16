@@ -18,7 +18,7 @@ esac
 
 alias ags='apt-get source'
 alias apb='sudo aptitude build-dep'
-alias api='sudo aptitude install'
+alias api='sudo aptitude -R install'
 alias apr='sudo aptitude remove'
 alias aps='aptitude search'
 alias apu='sudo aptitude update && sudo aptitude full-upgrade'

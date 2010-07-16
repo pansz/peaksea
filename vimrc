@@ -66,35 +66,39 @@ if !has("gui_running")
         if has('x11')
             set mouse=a
         endif
-        " Map <Pad5> to <Nop>
-        map OE <Nop>
-        map! OE <Nop>
-        map OM <CR>
-        " Map the shift-pad keys.
-        map Ow <S-Home>
-        map! Ow <S-Home>
-        map Ox <S-Up>
-        map! Ox <S-Up>
-        map Oy <S-PageUp>
-        map! Oy <S-PageUp>
-        map Ot <S-Left>
-        map! Ot <S-Left>
-        map Ou <Nop>
-        map! Ou <Nop>
-        map Ov <S-Right>
-        map! Ov <S-Right>
-        map Oq <S-End>
-        map! Oq <S-End>
-        map Or <S-Down>
-        map! Or <S-Down>
-        map Os <S-PageDown>
-        map! Os <S-PageDown>
-        map [2~ <C-Insert>
-        map! [2~ <C-Insert>
-        map Op <S-Insert>
-        map! Op <S-Insert>
-        map On <S-Del>
-        map! On <S-Del>
+
+        " this seems no longer required
+        if 0
+            " Map <Pad5> to <Nop>
+            map OE <Nop>
+            map! OE <Nop>
+            map OM <CR>
+            " Map the shift-pad keys.
+            map Ow <S-Home>
+            map! Ow <S-Home>
+            map Ox <S-Up>
+            map! Ox <S-Up>
+            map Oy <S-PageUp>
+            map! Oy <S-PageUp>
+            map Ot <S-Left>
+            map! Ot <S-Left>
+            map Ou <Nop>
+            map! Ou <Nop>
+            map Ov <S-Right>
+            map! Ov <S-Right>
+            map Oq <S-End>
+            map! Oq <S-End>
+            map Or <S-Down>
+            map! Or <S-Down>
+            map Os <S-PageDown>
+            map! Os <S-PageDown>
+            map [2~ <C-Insert>
+            map! [2~ <C-Insert>
+            map Op <S-Insert>
+            map! Op <S-Insert>
+            map On <S-Del>
+            map! On <S-Del>
+        endif
 
     elseif &term == 'screen'
         " screen terminal has wrong interpration of backspace
