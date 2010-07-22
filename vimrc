@@ -31,6 +31,7 @@ augroup vimrcEx
     " autocmd BufNew * :set fileformat=unix
     " autocmd BufNewFile,BufRead *.out,*.aux	setf tex
     autocmd BufNewFile,BufRead *.erm		setf erm
+    autocmd BufNewFile,BufRead *.cfg		setf wesnothcfg
 augroup END
 
 " Since the BufExplorer is loaded, disable this to improve performance.
