@@ -43,13 +43,14 @@ eng=music
 checkdir
 
 chn="桌面"
-eng=desktop
+eng=wall
 checkdir
 
 chn="下载"
-eng=share
+eng=download
 checkdir
 
+mkdir -p .config
 cd .config
 rm -f user-dirs.dirs
 ln -sf ../.vim/user-dirs.dirs user-dirs.dirs

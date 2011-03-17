@@ -339,45 +339,51 @@ runtime plugin/gzip.vim
 runtime plugin/netrwPlugin.vim
 runtime plugin/bufexplorer.vim
 runtime plugin/taglist.vim
+" runtime plugin/tohtml.vim
 " runtime plugin/crefvim.vim
 runtime macros/matchit.vim
 
 " vimim only works for vim7
 if v:version >= 700
-    let g:vimim_shuangpin_abc=1
-    "let g:vimim_tab_as_onekey=1
-    let g:vimim_static_input_style=1
+    let g:vimim_shuangpin='abc'
+    let g:vimim_chinese_input_mode='static'
     if has("win32") || has("win32unix")
         let g:vimim_mycloud_url="dll:".$HOME."/vimfiles/plugin/libvimim.dll:172.16.55.240"
     else
         let g:vimim_mycloud_url="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
     endif
     "let g:vimim_mycloud_url="app:".$HOME."/src/misc/myim/client/mycloud"
-    "let g:vimim_mycloud_url="http://127.0.0.1:8080/pwd/"
+    "let g:vimim_mycloud_url="http://127.0.0.1:8080/abc/"
+    "let g:vimim_mycloud_url="http://pim-cloud.appspot.com/qp/"
     if filereadable($HOME."/.vim/plugin/vimimsvn.vim")
         runtime plugin/vimimsvn.vim
     else
         runtime plugin/vimim.vim
     endif
-    let g:ywvim_ims=[
-                \['py', '拼音', 'pinyin.ywvim'],
-                \]
-    let g:ywvim_py = { 'gb' : 1 }
-    let g:ywvim_zhpunc = 1
-    let g:ywvim_listmax = 5
-    let g:ywvim_esc_autoff = 0
-    let g:ywvim_autoinput = 1
-    let g:ywvim_pagec = 1
-    let g:ywvim_helpim_on = 1
-    let g:ywvim_matchexact = 0
-    let g:ywvim_chinesecode = 1
-    let g:ywvim_gb = 0
-    let g:ywvim_preconv = 'g2b'
-    let g:ywvim_conv = ''
-    let g:ywvim_lockb = 0
-    "runtime plugin/ywvim.vim
-    "runtime plugin/imfw.vim
+    if 0
+        let g:ywvim_ims=[
+                    \['py', '拼音', 'pinyin.ywvim'],
+                    \]
+        let g:ywvim_py = { 'gb' : 1 }
+        let g:ywvim_zhpunc = 1
+        let g:ywvim_listmax = 5
+        let g:ywvim_esc_autoff = 0
+        let g:ywvim_autoinput = 1
+        let g:ywvim_pagec = 1
+        let g:ywvim_helpim_on = 1
+        let g:ywvim_matchexact = 0
+        let g:ywvim_chinesecode = 1
+        let g:ywvim_gb = 0
+        let g:ywvim_preconv = 'g2b'
+        let g:ywvim_conv = ''
+        let g:ywvim_lockb = 0
+        runtime plugin/ywvim.vim
+        runtime plugin/imfw.vim
+    endif
 endif
+
+" disable autoload of ruby,perl,python in vim.vim
+let g:vimsyn_embed=0
 
 " Before enabling the color scheme, make sure these options are on
 if v:version >= 600
