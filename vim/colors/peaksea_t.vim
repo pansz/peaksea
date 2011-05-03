@@ -47,11 +47,7 @@ if &background=='light'
   hi Search		guifg=NONE	guibg=#f8f8f8	gui=NONE
   hi Visual		guifg=NONE	guibg=#a6caf0	gui=NONE
   hi Cursor		guifg=#f0f0f0	guibg=#008000	gui=NONE
-  " The idea of CursorIM is pretty good, however, the feature is still buggy
-  " in the current version (Vim 7.0).
-  " The following line will be kept commented until the bug fixed.
-  "
-  " hi CursorIM		guifg=#f0f0f0	guibg=#800080
+  hi CursorIM		guifg=#f0f0f0	guibg=#800080   gui=NONE
   hi Special		guifg=#907000	guibg=NONE	gui=NONE
   hi Comment		guifg=#606000	guibg=NONE	gui=NONE
   hi Number		guifg=#907000	guibg=NONE	gui=NONE
@@ -162,7 +158,7 @@ if &background=='light'
     hi Search		ctermfg=NONE	ctermbg=!f8f8f8	cterm=NONE
     hi Visual		ctermfg=NONE	ctermbg=!a6caf0	cterm=NONE
     hi Cursor		ctermfg=!f0f0f0	ctermbg=!008000	cterm=NONE
-    " hi CursorIM	ctermfg=!f0f0f0	ctermbg=!800080
+    hi CursorIM		ctermfg=!f0f0f0	ctermbg=!800080 cterm=NONE
     hi Special		ctermfg=!907000	ctermbg=NONE	cterm=NONE
     hi Comment		ctermfg=!606000	ctermbg=NONE	cterm=NONE
     hi Number		ctermfg=!907000	ctermbg=NONE	cterm=NONE
@@ -274,7 +270,7 @@ elseif &background=='dark'
   hi Visual		guifg=#000000	guibg=#a6caf0	gui=NONE
   hi Cursor		guifg=#000000	guibg=#00f000	gui=NONE
   " NOTE THIS IS IN THE COOL SECTION
-  " hi CursorIM		guifg=#000000	guibg=#f000f0	gui=NONE
+  hi CursorIM		guifg=#000000	guibg=#f0c0f0	gui=NONE
   hi StatusLine		guifg=#000000	guibg=#a6caf0	gui=NONE
   hi LineNr		guifg=#b0b0b0	guibg=NONE	gui=NONE
   hi Question		guifg=#000000	guibg=#d0d090	gui=NONE
@@ -508,7 +504,7 @@ elseif &background=='dark'
     hi Visual		ctermfg=!000000	ctermbg=!a6caf0	cterm=NONE
     hi Cursor		ctermfg=!000000	ctermbg=!00f000	cterm=NONE
     " NOTE THIS IS IN THE COOL SECTION
-    " hi CursorIM	ctermfg=!000000	ctermbg=!f000f0	cterm=NONE
+    hi CursorIM		ctermfg=!000000	ctermbg=!f0c0f0	cterm=NONE
     hi StatusLine	ctermfg=!000000	ctermbg=!a6caf0	cterm=NONE
     hi LineNr		ctermfg=!b0b0b0	ctermbg=NONE	cterm=NONE
     hi Question		ctermfg=!000000	ctermbg=!d0d090	cterm=NONE
