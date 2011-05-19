@@ -1,3 +1,4 @@
+#!/bin/sh
 # init my environment
 cd
 ln -sf .vim/bashrc .bash_aliases
@@ -14,7 +15,8 @@ checkdir() {
     if [ -d $chn ]; then
         mv $chn $eng
     else
-        mkdir -p $eng
+        #mkdir -p $eng
+        echo
     fi
 }
 

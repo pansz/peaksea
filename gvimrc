@@ -15,10 +15,10 @@ else
     set guioptions=Aig
 endif
 
-let in_diff_mode = 0
-if v:version >= 600
-    windo let in_diff_mode = in_diff_mode + &l:diff
-endif
+"let in_diff_mode = 0
+"if v:version >= 600
+"    windo let in_diff_mode = in_diff_mode + &l:diff
+"endif
 
 " Font must be set in .gvimrc
 if has("gui_win32")		" NT Windows
@@ -85,14 +85,15 @@ elseif has("x11")		" X Window
     " set guifontwide=-*-song\ ti-medium-r-*-*-16-*-*-*-*-*-*-*
     set guifont=DejaVu\ Sans\ Mono\ 16
     nunmap <Leader>fp
-    set columns=999 lines=999
+    " set to 999 will cause hangup when start gvim
+    "set columns=160 lines=50
     nnoremap <silent> <Leader>fp :cope 1<CR><C-W>w:Tlist<CR>
     " make the Keypad work in Linux
     nmap <kEnter> <cr>
     nmap <kMinus> -
 endif
 
-unlet in_diff_mode
+"unlet in_diff_mode
 
 " noremap! <MiddleMouse> <Nop>
 " noremap <MiddleMouse> <Nop>

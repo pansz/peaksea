@@ -111,6 +111,10 @@ if !has("gui_running")
         set t_Co=16
         set mouse=a
         set ttymouse=xterm2
+    elseif &term == 'screen-256color'
+        set t_Co=256
+        set mouse=a
+        set ttymouse=xterm2
     elseif &term == 'cygwin'
         " Truly crippled terminal, nothing to say, but it's the default.
         " Sometimes we have to use it
@@ -346,39 +350,22 @@ runtime macros/matchit.vim
 " vimim only works for vim7
 if v:version >= 700
     let g:vimim_shuangpin='abc'
+    let g:vimim_cursor_color='#f0c0f0'
     let g:vimim_chinese_input_mode='static'
+    let g:vimim_custom_color=0
+    set pumheight=10
     if has("win32") || has("win32unix")
-        let g:vimim_mycloud_url="dll:".$HOME."/vimfiles/plugin/libvimim.dll:172.16.55.240"
+        let g:vimim_cloud_mycloud="dll:".$HOME."/vimfiles/plugin/libvimim.dll:172.16.55.240"
     else
-        let g:vimim_mycloud_url="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
+        let g:vimim_cloud_mycloud="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
     endif
-    "let g:vimim_mycloud_url="app:".$HOME."/src/misc/myim/client/mycloud"
-    "let g:vimim_mycloud_url="http://127.0.0.1:8080/abc/"
-    "let g:vimim_mycloud_url="http://pim-cloud.appspot.com/qp/"
+    "let g:vimim_cloud_mycloud="app:".$HOME."/src/misc/myim/client/mycloud"
+    "let g:vimim_cloud_mycloud="http://127.0.0.1:8080/abc/"
+    "let g:vimim_cloud_mycloud="http://pim-cloud.appspot.com/qp/"
     if filereadable($HOME."/.vim/plugin/vimimsvn.vim")
         runtime plugin/vimimsvn.vim
     else
         runtime plugin/vimim.vim
-    endif
-    if 0
-        let g:ywvim_ims=[
-                    \['py', '拼音', 'pinyin.ywvim'],
-                    \]
-        let g:ywvim_py = { 'gb' : 1 }
-        let g:ywvim_zhpunc = 1
-        let g:ywvim_listmax = 5
-        let g:ywvim_esc_autoff = 0
-        let g:ywvim_autoinput = 1
-        let g:ywvim_pagec = 1
-        let g:ywvim_helpim_on = 1
-        let g:ywvim_matchexact = 0
-        let g:ywvim_chinesecode = 1
-        let g:ywvim_gb = 0
-        let g:ywvim_preconv = 'g2b'
-        let g:ywvim_conv = ''
-        let g:ywvim_lockb = 0
-        runtime plugin/ywvim.vim
-        runtime plugin/imfw.vim
     endif
 endif
 
