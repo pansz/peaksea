@@ -362,10 +362,14 @@ if v:version >= 700
     "let g:vimim_cloud_mycloud="app:".$HOME."/src/misc/myim/client/mycloud"
     "let g:vimim_cloud_mycloud="http://127.0.0.1:8080/abc/"
     "let g:vimim_cloud_mycloud="http://pim-cloud.appspot.com/qp/"
-    if filereadable($HOME."/.vim/plugin/vimimsvn.vim")
-        runtime plugin/vimimsvn.vim
-    else
+    if has("gui_win32")		" NT Windows
         runtime plugin/vimim.vim
+    else
+        if filereadable($HOME."/.vim/plugin/vimimsvn.vim")
+            runtime plugin/vimimsvn.vim
+        else
+            runtime plugin/vimim.vim
+        endif
     endif
 endif
 

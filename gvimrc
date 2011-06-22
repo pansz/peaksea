@@ -10,9 +10,9 @@
 set t_vb= mousehide cmdheight=1
 
 if v:version >= 700
-    set guioptions=Aige
+    set guioptions=aige
 else
-    set guioptions=Aig
+    set guioptions=aig
 endif
 
 "let in_diff_mode = 0
@@ -56,14 +56,9 @@ if has("gui_win32")		" NT Windows
         nnoremap <Leader>fi :se gfn=isi_ansi:h14:cDEFAULT<cr>
 
         " In diff mode
-        if in_diff_mode == 1
-            set guifont=isi_ansi:h14:cDEFAULT
-        endif
-
-        if has("gui_win32")		" NT Windows
-            nnoremap <silent> <Leader>cv :%s/“/『/eg<CR>:%s/‘/「/eg<CR>:%s/’/」/eg<CR>:%s/”/』/eg<CR>:%s/…/┅/eg<CR>:%s/—/─/eg<CR>:%s/–/－/eg<CR>
-            nnoremap <silent> <Leader>cu :%s/磘/'t/eg<CR>:%s/磗/'s/eg<CR>
-        endif
+        "if in_diff_mode == 1
+        "    set guifont=isi_ansi:h14:cDEFAULT
+        "endif
 
     else
         set guifont=Lucida_Console:h16
