@@ -346,6 +346,8 @@ runtime plugin/taglist.vim
 " runtime plugin/tohtml.vim
 " runtime plugin/crefvim.vim
 runtime macros/matchit.vim
+let g:netlog_host="172.16.55.26"
+runtime plugin/netlog.vim
 
 " vimim only works for vim7
 if v:version >= 700
@@ -355,9 +357,13 @@ if v:version >= 700
     let g:vimim_custom_color=0
     set pumheight=10
     if has("win32") || has("win32unix")
-        let g:vimim_cloud_mycloud="dll:".$HOME."/vimfiles/plugin/libvimim.dll:172.16.55.240"
+        "let g:vimim_cloud_mycloud="dll:".$HOME."/vimfiles/plugin/libvimim.dll:172.16.55.240"
     else
-        let g:vimim_cloud_mycloud="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
+        if has("python")
+            let g:vimim_mycloud="py:172.16.55.240"
+        else
+            let g:vimim_mycloud="dll:".$HOME."/.vim/plugin/libvimim.so:172.16.55.240"
+        endif
     endif
     "let g:vimim_cloud_mycloud="app:".$HOME."/src/misc/myim/client/mycloud"
     "let g:vimim_cloud_mycloud="http://127.0.0.1:8080/abc/"

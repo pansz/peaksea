@@ -166,23 +166,23 @@ if &background=='light'
     hi StatusLine	ctermfg=fg	ctermbg=153	cterm=NONE
     hi LineNr		ctermfg=242	ctermbg=NONE	cterm=NONE
     hi Question		ctermfg=fg	ctermbg=186	cterm=NONE
-    hi PreProc		ctermfg=29	ctermbg=NONE	cterm=NONE
+    hi PreProc		ctermfg=28	ctermbg=NONE	cterm=NONE
     hi Statement	ctermfg=25	ctermbg=NONE	cterm=NONE
     hi Type		ctermfg=25	ctermbg=NONE	cterm=NONE
     hi Todo		ctermfg=88	ctermbg=186	cterm=NONE
     " NOTE THIS IS IN THE WARM SECTION
-    hi Error		ctermfg=130	ctermbg=NONE	cterm=NONE
-    hi Identifier	ctermfg=133	ctermbg=NONE	cterm=NONE
+    hi Error		ctermfg=160	ctermbg=NONE	cterm=NONE
+    hi Identifier	ctermfg=127	ctermbg=NONE	cterm=NONE
     hi ModeMsg		ctermfg=fg	ctermbg=146	cterm=NONE
     hi VisualNOS	ctermfg=fg	ctermbg=146	cterm=NONE
     hi SpecialKey	ctermfg=25	ctermbg=NONE	cterm=NONE
     hi NonText		ctermfg=18	ctermbg=252	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
     "hi NonText		ctermfg=18	ctermbg=NONE	cterm=NONE
-    hi Directory	ctermfg=133	ctermbg=NONE	cterm=NONE
+    hi Directory	ctermfg=127	ctermbg=NONE	cterm=NONE
     hi ErrorMsg		ctermfg=fg	ctermbg=216	cterm=NONE
     hi MoreMsg		ctermfg=64	ctermbg=NONE	cterm=NONE
-    hi Title		ctermfg=133	ctermbg=NONE	cterm=NONE
+    hi Title		ctermfg=127	ctermbg=NONE	cterm=NONE
     hi WarningMsg	ctermfg=124	ctermbg=NONE	cterm=NONE
     hi WildMenu		ctermfg=fg	ctermbg=186	cterm=NONE
     hi Folded		ctermfg=NONE	ctermbg=151	cterm=NONE
@@ -203,9 +203,9 @@ if &background=='light'
       if has('spell')
         if 0
           " ctermsp is not supported in Vim7, we ignore it.
-          hi SpellBad	cterm=undercurl	ctermbg=NONE	ctermfg=130
+          hi SpellBad	cterm=undercurl	ctermbg=NONE	ctermfg=160
           hi SpellCap	cterm=undercurl	ctermbg=NONE	ctermfg=25
-          hi SpellRare	cterm=undercurl	ctermbg=NONE	ctermfg=133
+          hi SpellRare	cterm=undercurl	ctermbg=NONE	ctermfg=127
           hi SpellLocal	cterm=undercurl	ctermbg=NONE	ctermfg=23
         else
           hi SpellBad	cterm=undercurl	ctermbg=NONE	ctermfg=NONE
@@ -491,9 +491,9 @@ elseif &background=='dark'
     " Comment/Uncomment the following line to disable/enable transparency
     hi Normal		ctermfg=252	ctermbg=NONE	cterm=NONE
     hi Comment		ctermfg=186	ctermbg=NONE	cterm=NONE
-    hi Constant		ctermfg=110	ctermbg=NONE	cterm=NONE
+    hi Constant		ctermfg=74	ctermbg=NONE	cterm=NONE
     hi Number		ctermfg=179	ctermbg=NONE	cterm=NONE
-    hi Identifier	ctermfg=219	ctermbg=NONE	cterm=NONE
+    hi Identifier	ctermfg=225	ctermbg=NONE	cterm=NONE
     hi Statement	ctermfg=153	ctermbg=NONE	cterm=NONE
     hi PreProc		ctermfg=84	ctermbg=NONE	cterm=NONE
     hi Type		ctermfg=153	ctermbg=NONE	cterm=NONE
@@ -504,9 +504,9 @@ elseif &background=='dark'
     hi Visual		ctermfg=16	ctermbg=153	cterm=NONE
     hi Cursor		ctermfg=16	ctermbg=46	cterm=NONE
     " NOTE THIS IS IN THE COOL SECTION
-    hi CursorIM		ctermfg=16	ctermbg=219	cterm=NONE
+    hi CursorIM		ctermfg=16	ctermbg=225	cterm=NONE
     hi StatusLine	ctermfg=16	ctermbg=153	cterm=NONE
-    hi LineNr		ctermfg=249	ctermbg=NONE	cterm=NONE
+    hi LineNr		ctermfg=145	ctermbg=NONE	cterm=NONE
     hi Question		ctermfg=16	ctermbg=186	cterm=NONE
     hi ModeMsg		ctermfg=fg	ctermbg=18	cterm=NONE
     hi VisualNOS	ctermfg=fg	ctermbg=18	cterm=NONE
@@ -514,10 +514,10 @@ elseif &background=='dark'
     hi NonText		ctermfg=69	ctermbg=233	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
     hi NonText		ctermfg=69	ctermbg=NONE	cterm=NONE
-    hi Directory	ctermfg=110	ctermbg=NONE	cterm=NONE
+    hi Directory	ctermfg=74	ctermbg=NONE	cterm=NONE
     hi ErrorMsg		ctermfg=186	ctermbg=88	cterm=NONE
     hi MoreMsg		ctermfg=150	ctermbg=NONE	cterm=NONE
-    hi Title		ctermfg=219	ctermbg=NONE	cterm=NONE
+    hi Title		ctermfg=225	ctermbg=NONE	cterm=NONE
     hi WarningMsg	ctermfg=209	ctermbg=NONE	cterm=NONE
     hi WildMenu		ctermfg=16	ctermbg=186	cterm=NONE
     hi Folded		ctermfg=NONE	ctermbg=22	cterm=NONE
@@ -539,7 +539,7 @@ elseif &background=='dark'
         if 0
           hi SpellBad	cterm=undercurl	ctermbg=NONE	ctermfg=209
           hi SpellCap	cterm=undercurl	ctermbg=NONE	ctermfg=69
-          hi SpellRare	cterm=undercurl	ctermbg=NONE	ctermfg=219
+          hi SpellRare	cterm=undercurl	ctermbg=NONE	ctermfg=225
           hi SpellLocal	cterm=undercurl	ctermbg=NONE	ctermfg=153
         else
           hi SpellBad	cterm=undercurl	ctermbg=NONE	ctermfg=NONE
