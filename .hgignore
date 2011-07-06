@@ -1,3 +1,7 @@
 \.svn$
 \.swp$
 .netrwhist
+plugin/libvimim.so
+plugin/vimimsvn.vim
+plugin/libvimim.dll
+
